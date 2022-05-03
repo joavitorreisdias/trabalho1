@@ -93,3 +93,88 @@ int t,p,q, matriz[3][3];
 
 }
 
+
+
+
+
+
+
+
+#include <string.h>
+
+#include <stdio.h>
+#include <stdlib.h>
+
+
+
+void main()
+{
+char a,b,c,d,e,f,g,h,i,j,jogada,matriz[3][3];
+int t,p,q,t,y;
+ a = b = c = d = e = f = g = h = i = j = "  ";
+    printf("iniciando o jogo...\n");
+  for(q = 0; q < 9; q++){
+    printf(" em qual linha fara a jogada?\n"); scanf("%i", &t);
+    printf("\nem qual coluna fara a jogada?"); scanf("%i", &p);
+    printf("\nfaca sua jogada player 1: X ou O?\n");
+    scanf(" %c", &matriz[t][p]);
+    if( matriz[t][p] == "X" || matriz[t][p] == "O"){
+    printf("%c | %c | %c" ,matriz[1][1], matriz[1][2], matriz[1][3]);
+    printf("\n------------\n");
+    printf("%c | %c | %c" ,matriz[2][1], matriz[2][2], matriz[2][3]);
+    printf("\n------------\n");
+    printf("%c | %c | %c" ,matriz[3][1], matriz[3][2], matriz[3][3]);
+    }
+    else{
+
+        do {
+            printf("jogada invalida");
+            printf("\nfaca sua jogada player 1: X ou O?\n");
+            scanf(" %c", &matriz[t][p]);
+        }while(matriz[t][p] != "X" || matriz[t][p] != "O")
+        if( matriz[t][p] == "X" || matriz[t][p] == "O"){
+        printf("%c | %c | %c" ,matriz[1][1], matriz[1][2], matriz[1][3]);
+        printf("\n------------\n");
+        printf("%c | %c | %c" ,matriz[2][1], matriz[2][2], matriz[2][3]);
+        printf("\n------------\n");
+        printf("%c | %c | %c" ,matriz[3][1], matriz[3][2], matriz[3][3]);
+        }
+    }
+    if( matriz [1][1] == matriz [1][2] == matriz [1][3] == "X" || matriz [1][1] == matriz [1][2] == matriz [1][3] == "O"
+       || matriz [2][1] == matriz [2][2] == matriz [2][3] == "X" || matriz [2][1] == matriz [2][2] == matriz [2][3] == "O"
+       || matriz [3][1] == matriz [3][2] == matriz [3][3] == "X" || matriz [3][1] == matriz [3][2] == matriz [3][3] == "O"
+       || matriz [1][1] == matriz [2][2] == matriz [3][3] == "X" || matriz [1][1] == matriz [2][2] == matriz [3][3] == "O"){
+        break;
+       }
+    printf("sua vez player 2");
+    printf(" em qual linha fara a jogada?\n"); scanf("%i", &t);
+    printf("\nem qual coluna fara a jogada?"); scanf("%i", &p);
+    printf("\nfaca sua jogada player 2: X ou O?\n");
+    scanf(" %c", &matriz[t][p]);
+    if( matriz[t][p] == "X" || matriz[t][p] == "O"){
+    printf("%c | %c | %c" ,matriz[1][1], matriz[1][2], matriz[1][3]);
+    printf("\n------------\n");
+    printf("%c | %c | %c" ,matriz[2][1], matriz[2][2], matriz[2][3]);
+    printf("\n------------\n");
+    printf("%c | %c | %c" ,matriz[3][1], matriz[3][2], matriz[3][3]);
+    }
+    else{
+
+        do {
+            printf("jogada invalida");
+            printf("\nfaca sua jogada player 1: X ou O?\n");
+            scanf(" %c", &matriz[t][p]);
+        }while(matriz[t][p] != "X" || matriz[t][p] != "O")
+        if( matriz[t][p] == "X" || matriz[t][p] == "O"){
+        printf("%c | %c | %c" ,matriz[1][1], matriz[1][2], matriz[1][3]);
+        printf("\n------------\n");
+        printf("%c | %c | %c" ,matriz[2][1], matriz[2][2], matriz[2][3]);
+        printf("\n------------\n");
+        printf("%c | %c | %c" ,matriz[3][1], matriz[3][2], matriz[3][3]);
+        }
+    }
+  }
+}
+
+
+
