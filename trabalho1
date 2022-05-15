@@ -689,4 +689,12 @@ int t,p,q,y,resultado;
 
 }
 
-
+    if( matriz[t-1][p-1] != 'X' && matriz[t-1][p-1] != 'O' || t < 0 || t > 3 || p < 0 || p > 3){
+         do {
+            printf("jogada invalida, terá de repitir a jogada");
+            printf(" \nem qual linha fara a jogada?\n"); scanf("%i", &t);
+            printf("\nem qual coluna fara a jogada?"); scanf("%i", &p);
+            printf("\nfaca sua jogada novamente: X ou O?\n");
+            scanf(" %c", &matriz[t-1][p-1]);
+            printf("\nVOCE DIGITOU %c\n",matriz[t-1][p-1] );
+        }while(matriz[t-1][p-1] != 'X' && matriz[t-1][p-1] != 'O');
