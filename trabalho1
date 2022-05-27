@@ -798,3 +798,133 @@ int checardiagonal( char matriz[3][3], int resultado){
             resultado++;
         }
     return resultado;
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+ int checarlinha(char matriz[3][3], int resultado);
+ int checarcoluna(char matriz[3][3], int resultado);
+ int checardiagonal(char matriz[3][3], int resultado);
+ void verificarposicao( char matriz[3][3], int t, int p);
+ void verificarjogada( char matriz[3][3], int t, int p);
+
+void main()
+{
+char matriz[3][3];
+int t,p,resultado;
+
+    printf("iniciando o jogo...\n");
+    for(int q = 0; q < 9; q++){
+
+        if( q % 2 == 0){
+            printf("\nsua vez  PLAYER 1");
+        }
+        else{
+            printf("\nsua vez PLAYER 2");
+        }
+
+        printf(" \nem qual linha fara a jogada?\n"); scanf("%i", &t);
+        printf("\nem qual coluna fara a jogada?"); scanf("%i", &p);
+
+        verificarposicao( char matriz[3][3], int t, int p);
+
+        printf("\nfaca sua jogada : X ou O?\n");
+        scanf(" %c", &matriz[t-1][p-1]);
+        printf("\nVOCE DIGITOU %c\n",matriz[t-1][p-1] );
+
+        verificarjogada( char matriz[3][3], int t, int p);
+
+        printf("%c | %c | %c" ,matriz[0][0], matriz[0][1], matriz[0][2]);
+        printf("\n____________\n");
+        printf("%c | %c | %c" ,matriz[1][0], matriz[1][1], matriz[1][2]);
+        printf("\n____________\n");
+        printf("%c | %c | %c" ,matriz[2][0], matriz[2][1], matriz[2][2]);
+
+        resultado += checarlinha( matriz[3][3],resultado);
+        resultado += checarcoluna( matriz[3][3], resultado);
+        resultado += checardiagonal(matriz[3][3],resultado);
+
+        if( resultado != 0){
+
+            if( q % 2 == 0){
+                printf("\nPLAYER 1 venceu");
+            }
+            else{
+                printf("\nPLAYER 2 venceu");
+            }
+            resultado++;
+            break;
+        }
+
+    }
+
+    if( resultado == 0){
+      printf("\ndeu velha");
+    }
+    printf("\nFIM");
+
+}
+
+int checarlinha( char matriz[3][3], int resultado){
+
+    for(int i = 0; i < 3; i++){
+
+        if( matriz [i][0] == matriz [i][1] && matriz [i][0] == matriz [i][2] && matriz [i][0] == 'X' ||
+            matriz [i][1] == matriz [i][2] && matriz [i][0] == matriz [i][2] && matriz [i][0] == 'O')
+        {
+            resultado++;
+        }
+    }
+    return resultado;
+}
+
+int checarcoluna( char matriz[3][3], int resultado){
+
+    for(int i = 0; i < 3; i++){
+
+        if( matriz [0][i] == matriz [1][i] && matriz [0][i] == matriz [2][i] && matriz [0][i] == 'X' ||
+            matriz [0][i] == matriz [1][i] && matriz [0][i] == matriz [2][i] && matriz [0][i] == 'O')
+        {
+            resultado++;
+        }
+    }
+    return resultado;
+}
+
+int checardiagonal( char matriz[3][3], int resultado){
+
+        if( matriz [0][0] == matriz [1][1] && matriz [0][0] == matriz [2][2] && matriz [0][0] == 'X' ||
+            matriz [0][0] == matriz [1][1] && matriz [0][0] == matriz [2][2] && matriz [0][0] == 'O' ||
+            matriz [0][2] == matriz [1][1] && matriz [0][2] == matriz [2][0] && matriz [0][2] == 'X'  ||
+            matriz [0][2] == matriz [1][1] && matriz [0][2] == matriz [2][0] && matriz [0][2] == 'O' )
+        {
+            resultado++;
+        }
+    return resultado;
+}
+
+void verificarposicao( char matriz[3][3], int t, int p){
+    if(t > 3 || t < 1 || p > 3 || p < 1  ){
+        printf("\n essa posicao nao existe no tabuleiro, repita");
+        printf(" \nem qual linha fara a jogada?\n"); scanf("%i", &t);
+        printf("\nem qual coluna fara a jogada?"); scanf("%i", &p);
+
+    }
+    if(matriz[t-1][p-1] == 'X' || matriz[t-1][p-1] == 'O'){
+        printf("\nessa posicao ja esta preenchida, repita");
+        printf(" \nem qual linha fara a jogada?\n"); scanf("%i", &t);
+        printf("\nem qual coluna fara a jogada?"); scanf("%i", &p);
+        }
+}
+
+void verificarjogada( char matriz[3][3], int t, int p){
+    if( matriz[t-1][p-1] != 'X' && matriz[t-1][p-1] != 'O'){
+        do {
+           printf("jogada invalida");
+           printf("\nfaca sua jogada player 1: X ou O?\n");
+           scanf(" %c", &matriz[t-1][p-1]);
+           printf("\nVOCE DIGITOU %c\n",matriz[t-1][p-1] );
+        }while(matriz[t-1][p-1] != 'X' && matriz[t-1][p-1] != 'O');
+    }
+}
