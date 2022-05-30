@@ -928,3 +928,157 @@ void verificarjogada( char matriz[3][3], int t, int p){
         }while(matriz[t-1][p-1] != 'X' && matriz[t-1][p-1] != 'O');
     }
 }
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+ int checarlinha(char grade[3][3], int resultado);
+ int checarcoluna (char grade[3][3], int resultado);
+ int checardiagonal(char grade[3][3], int resultado);
+ void verificarposicao( char grade[3][3], int linha, int coluna);
+ void verificarjogada( char grade[3][3], int linha, int coluna);
+ void quemjoga( int rodada);
+ void imprimirgrade( char grade[3][3]);
+ void criargrade(char grade[3][3]);
+
+void main()
+{
+char grade[3][3];
+    criargrade(grade);   //gera a tabela
+
+int linha,coluna,resultado;
+
+    printf("iniciando o jogo...\n");
+
+    for(int rodada = 0; rodada < 9; rodada++){  //roda as 9 rodadas do jogo da velha
+
+        quemjoga(rodada); //definese é o jogar 1 ou 2 que irá jogar
+
+        printf(" \nem qual linha fara a jogada(1 a 3)?\n"); scanf("%i", &linha);   //pede e recebe a linha
+        printf("\nem qual coluna fara a jogada(1 a 3)?"); scanf("%i", &coluna);    //pede e recebe a coluna
+
+        verificarposicao( grade, linha, coluna);  //verifica se a posiçao esta dentro do espaço da grade e se esse espaço ja esta ocupado
+
+        printf("\nfaca sua jogada : X ou O?\n");    //pede a jogada
+        scanf(" %c", &grade[linha-1][coluna-1]);    //recebe a jogada e coloca no espaço escolhido pelo jogador, o -1 serve porque o jogador escolhe a posição de 1 a 3, enquanto na matriz é de 0 a 2
+        printf("\nVOCE DIGITOU %c\n",grade[linha-1][coluna-1] );
+
+        verificarjogada( grade, linha, coluna);  //verifica se foi escolhido entre X ou O
+
+        imprimirgrade(grade);  //imprime a grade com as jogadas
+
+        resultado += checarlinha( grade,resultado);   //se alguma das condições de vitória do jogo da velha for checada, o valor do resultado será diferente de 1
+        resultado += checarcoluna( grade, resultado);
+        resultado += checardiagonal(grade,resultado);
+
+        if( resultado != 0){   //se o resultado for diferente de 0, alguém ganhou e o loop de for das rodadas se encerra
+
+            if( rodada % 2 == 0){
+                printf("\nPLAYER 1 venceu");   //se a jogada for par o player 1 ganha
+            }
+            else{
+                printf("\nPLAYER 2 venceu");   //se for impar é o player 2 que vence
+            }
+            resultado++;
+            break;   //serve para sair do loop do for se alguém tiver ganhado
+        }
+
+    }
+
+    if( resultado == 0){  //se ninguém ganhou durantes as nove rodadas, deu velha
+      printf("\ndeu velha");
+    }
+    printf("\nFIM");
+
+}
+
+int checarlinha( char grade[3][3], int resultado){
+
+    for(int i = 0; i < 3; i++){
+
+        if( grade [i][0] == grade [i][1] && grade [i][0] == grade [i][2] && grade [i][0] == 'X' ||
+            grade [i][1] == grade [i][2] && grade [i][0] == grade [i][2] && grade [i][0] == 'O')
+        {
+            resultado++;
+        }
+    }
+    return resultado;
+}
+
+int checarcoluna( char grade[3][3], int resultado){
+
+    for(int i = 0; i < 3; i++){
+
+        if( grade [0][i] == grade [1][i] &&  grade[0][i] == grade [2][i] && grade [0][i] == 'X' ||
+            grade [0][i] == grade [1][i] && grade [0][i] == grade [2][i] && grade [0][i] == 'O')
+        {
+            resultado++;
+        }
+    }
+    return resultado;
+}
+
+int checardiagonal( char grade[3][3], int resultado){
+
+        if( grade [0][0] == grade [1][1] && grade [0][0] == grade [2][2] && grade [0][0] == 'X' ||
+            grade [0][0] == grade [1][1] && grade [0][0] == grade [2][2] && grade [0][0] == 'O' ||
+            grade [0][2] == grade [1][1] && grade [0][2] == grade [2][0] && grade [0][2] == 'X' ||
+            grade [0][2] == grade [1][1] && grade [0][2] == grade [2][0] && grade [0][2] == 'O' )
+        {
+            resultado++;
+        }
+    return resultado;
+}
+
+void verificarposicao( char grade[3][3], int linha, int coluna){
+    if(linha > 3 || linha < 1 || coluna > 3 || coluna < 1  ){
+        printf("\n essa posicao nao existe no tabuleiro, repita");
+        printf(" \nem qual linha fara a jogada?\n"); scanf("%i", &linha);
+        printf("\nem qual coluna fara a jogada?"); scanf("%i", &coluna);
+
+    }
+    if(grade[linha-1][coluna-1] == 'X' || grade[linha-1][coluna-1] == 'O'){
+        printf("\nessa posicao ja esta preenchida, repita");
+        printf(" \nem qual linha fara a jogada?\n"); scanf("%i", &linha);
+        printf("\nem qual coluna fara a jogada?"); scanf("%i", &coluna);
+        }
+}
+
+void verificarjogada( char grade[3][3], int linha, int coluna){
+    if( grade[linha-1][coluna-1] != 'X' && grade[linha-1][coluna-1] != 'O'){
+        do {
+           printf("jogada invalida");
+           printf("\nfaca sua jogada player 1: X ou O?\n");
+           scanf(" %c", &grade[linha-1][coluna-1]);
+           printf("\nVOCE DIGITOU %c\n",grade[linha-1][coluna-1] );
+        }while(grade[linha-1][coluna-1] != 'X' && grade[linha-1][coluna-1] != 'O');
+    }
+}
+
+void quemjoga( int rodada){
+    if( rodada % 2 == 0){
+            printf("\nsua vez  PLAYER 1");
+        }
+        else{
+            printf("\nsua vez PLAYER 2");
+        }
+}
+
+void imprimirgrade(  char grade[3][3]){
+        printf("%c | %c | %c" ,grade[0][0], grade[0][1], grade[0][2]);
+        printf("\n____________\n");
+        printf("%c | %c | %c" ,grade[1][0], grade[1][1], grade[1][2]);
+        printf("\n____________\n");
+        printf("%c | %c | %c" ,grade[2][0], grade[2][1], grade[2][2]);
+}
+
+void criargrade(char grade[3][3]){
+     for(int i =0; i < 3;i++){
+        for( int j =0; j < 3; j++){
+           grade[i][j] = ' ';
+        }
+    }
+}
+
